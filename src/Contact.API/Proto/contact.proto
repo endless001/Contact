@@ -1,0 +1,23 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Contact.API.Grpc";
+
+package Contact;
+
+// The greeting service definition.
+service ContactGrpc {
+
+   rpc AddContact(ContactRequest) returns (ContactBookResponse) {}
+   rpc UpdateContact(ContactRequest) returns (ContactBookResponse){}
+   rpc GetContactList(ContactRequest) returns (ContactBookResponse){}
+
+}
+message ContactRequest{
+
+}
+message ContactBookResponse {
+
+}
+
+
+
