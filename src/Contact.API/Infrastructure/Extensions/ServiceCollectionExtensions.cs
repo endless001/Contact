@@ -1,9 +1,12 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
+using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 
 
 namespace Contact.API.Infrastructure.Extensions
@@ -14,18 +17,16 @@ namespace Contact.API.Infrastructure.Extensions
         {
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
             var identityUrl = configuration.GetValue<string>("IdentityUrl");
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 
-            }).AddJwtBearer(options =>
-            {
+
+            services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+              .AddIdentityServerAuthentication(options =>
+              {
                 options.Authority = identityUrl;
+                options.SupportedTokens = SupportedTokens.Jwt;
                 options.RequireHttpsMetadata = false;
-                options.Audience = "contact";
-            });
-
+                options.ApiName = "contact";
+              });
             return services;
         }
     }

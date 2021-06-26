@@ -35,7 +35,7 @@ namespace Contact.API
                 AddScoped<IGroupRepository, GroupRepository>();
 
             services.AddScoped<IAccountService, AccountService>();
-            services.AddCustomAuthentication(Configuration);
+
             services.AddControllers(options =>
             {
               options.Filters.Add(typeof(HttpGlobalExceptionFilter));
@@ -45,6 +45,7 @@ namespace Contact.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Contact.API", Version = "v1" });
             });
+            services.AddCustomAuthentication(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
