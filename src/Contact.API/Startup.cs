@@ -1,5 +1,7 @@
 using Contact.API.Configuration;
 using Contact.API.Data;
+using Contact.API.Infrastructure.Extensions;
+using Contact.API.Infrastructure.Filters;
 using Contact.API.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,8 +35,12 @@ namespace Contact.API
                 AddScoped<IGroupRepository, GroupRepository>();
 
             services.AddScoped<IAccountService, AccountService>();
-
-            services.AddControllers();
+            services.AddCustomAuthentication(Configuration);
+            services.AddControllers(options =>
+            {
+              options.Filters.Add(typeof(HttpGlobalExceptionFilter));
+              options.Filters.Add(typeof(ValidateModelStateFilter));
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Contact.API", Version = "v1" });
@@ -50,9 +56,10 @@ namespace Contact.API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Contact.API v1"));
             }
-            
+
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
