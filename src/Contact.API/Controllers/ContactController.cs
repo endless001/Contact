@@ -62,8 +62,8 @@ namespace Contact.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetContactRequestList(CancellationToken cancellationToken)
         {
-          var result = await _contactRequestRepository.GetContactRequestListAsync(AccountId, cancellationToken);
-          return Ok(result);
+            var result = await _contactRequestRepository.GetContactRequestListAsync(AccountId, cancellationToken);
+            return Ok(result);
         }
 
         [Route("addcontactrequest/{requestId}")]
@@ -88,14 +88,14 @@ namespace Contact.API.Controllers
             return Ok(result);
         }
         [HttpPost("creategroup")]
-        public async Task<IActionResult> CreateGroup(string groupName,CancellationToken cancellationToken)
+        public async Task<IActionResult> CreateGroup(string groupName, CancellationToken cancellationToken)
         {
             List<ContactModel> contacts = new List<ContactModel>();
             contacts.Add(new ContactModel()
             {
-              AccountId = AccountId
+                AccountId = AccountId
             });
-            await _groupRepository.CreateGroupAsync(groupName,contacts, cancellationToken);
+            await _groupRepository.CreateGroupAsync(groupName, contacts, cancellationToken);
             return Ok();
         }
     }

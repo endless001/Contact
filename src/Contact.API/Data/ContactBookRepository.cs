@@ -58,10 +58,6 @@ namespace Contact.API.Data
             return contactBook.ContactBooks;
         }
 
-
-       
-
-
         public async Task<bool> UpdateContactAsync(AccountModel account, CancellationToken cancellationToken)
         {
             var contactBook = (await _context.ContactBooks.FindAsync(c => c.AccountId == account.AccountId, null, cancellationToken)).

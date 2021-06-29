@@ -4,14 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Contact.API.Controllers
 {
-  public class BaseController : Controller
-  {
-    protected int AccountId
+    public class BaseController : Controller
     {
-      get
-      {
-        return Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value);
-      }
+        protected int AccountId
+        {
+            get
+            {
+                return Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value);
+            }
+        }
     }
-  }
 }

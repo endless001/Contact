@@ -18,7 +18,6 @@ namespace Contact.API.Infrastructure.Extensions
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
             var identityUrl = configuration.GetValue<string>("IdentityUrl");
 
-
             services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
               .AddIdentityServerAuthentication(options =>
               {

@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Contact.API.Infrastructure.ActionResults
 {
-  public class InternalServerErrorObjectResult : ObjectResult
-  {
-    public InternalServerErrorObjectResult(object value) : base(value)
+    public class InternalServerErrorObjectResult : ObjectResult
     {
-      StatusCode = StatusCodes.Status500InternalServerError;
+        public InternalServerErrorObjectResult(object value) : base(value)
+        {
+            StatusCode = StatusCodes.Status500InternalServerError;
+        }
     }
-  }
 }
