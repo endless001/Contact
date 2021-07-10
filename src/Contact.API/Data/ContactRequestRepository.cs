@@ -45,11 +45,11 @@ namespace Contact.API.Data
             return (await _context.ContactRequests.FindAsync(filter)).ToList();
         }
 
-        public async Task<bool> HandleContactRequestAsync(int accountId, int requestAcocountId, CancellationToken cancellationToken)
+        public async Task<bool> HandleContactRequestAsync(int accountId, int requestAccountId, CancellationToken cancellationToken)
         {
             var filter = Builders<ContactRequest>.Filter.Eq(a => a.AccountId, accountId) &
-                Builders<ContactRequest>.Filter.Eq(a => a.RequestAccountId, requestAcocountId);
-            var contactRequest = (await _context.ContactRequests.FindAsync(filter)).FirstOrDefault();
+                Builders<ContactRequest>.Filter.Eq(a => a.RequestAccountId, requestAccountId);
+            var contactRequest = (await _context.ContactRequests.FindAsync(filter, cancellationToken: cancellationToken)).FirstOrDefault();
             if (contactRequest != null)
             {
                 await _context.ContactRequests.UpdateOneAsync(filter, Builders<ContactRequest>.Update.Set("HandleTime", DateTime.Now)

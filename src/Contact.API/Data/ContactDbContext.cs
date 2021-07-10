@@ -24,27 +24,9 @@ namespace Contact.API.Data
             }
         }
 
-        public IMongoCollection<ContactBook> ContactBooks
-        {
-            get
-            {
-                return _database.GetCollection<ContactBook>("ContactBook");
-            }
-        }
-        public IMongoCollection<ContactRequest> ContactRequests
-        {
-            get
-            {
-                return _database.GetCollection<ContactRequest>("ContactRequest");
-            }
-        }
+        public IMongoCollection<ContactBook> ContactBooks => _database.GetCollection<ContactBook>("ContactBook");
+        public IMongoCollection<ContactRequest> ContactRequests => _database.GetCollection<ContactRequest>("ContactRequest");
 
-        public IMongoCollection<Group> Groups
-        {
-            get
-            {
-                return _database.GetCollection<Group>("Group");
-            }
-        }
+        public IMongoCollection<Group> Groups => _database.GetCollection<Group>("Group");
     }
 }

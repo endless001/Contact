@@ -18,7 +18,7 @@ namespace Contact.API.Data
 
         public async Task<bool> AddContactAsync(int accountId, AccountModel account, CancellationToken cancellationToken)
         {
-            var contactBook = (await _context.ContactBooks.FindAsync(a =>a.AccountId==accountId)).FirstOrDefault();
+            var contactBook = (await _context.ContactBooks.FindAsync(a =>a.AccountId==accountId, cancellationToken: cancellationToken)).FirstOrDefault();
             if (contactBook == null)
             {
                 contactBook = new ContactBook()

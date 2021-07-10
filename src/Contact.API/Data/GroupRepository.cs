@@ -31,7 +31,7 @@ namespace Contact.API.Data
         public async Task<List<Group>> GetGroupListAsync(int accountId, CancellationToken cancellationToken)
         {
             var filter = Builders<Group>.Filter.And(Builders<Group>.Filter.ElemMatch(c => c.Contacts, contact => contact.AccountId == accountId));
-            return (await _context.Groups.FindAsync(filter)).ToList();
+            return (await _context.Groups.FindAsync(filter, cancellationToken: cancellationToken)).ToList();
         }
     }
 }
